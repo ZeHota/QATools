@@ -1,17 +1,17 @@
 var qaCommands = {
     //Textbox
-    textBoxFillnVer: function (browser, option) {
+    textBoxFillnVer: function (browser, item) {
         this
             .click('@textBox')
-            .setValue('@fullName', option.name)
-            .setValue('@email', option.email)
-            .setValue('@currAdd', option.currAdd)
-            .setValue('@permAdd', option.permAdd)
+            .setValue('@fullName', item.name)
+            .setValue('@email', item.email)
+            .setValue('@currAdd', item.currAdd)
+            .setValue('@permAdd', item.permAdd)
             .click('@textSubmit')
-            .verify.containsText('@nameVer', option.name)
-            .verify.containsText('@emailVer', option.email)
-            .verify.containsText('@currAddVer', option.currAdd)
-            .verify.containsText('@permAddVer', option.permAdd)
+            .verify.containsText('@nameVer', item.name)
+            .verify.containsText('@emailVer', item.email)
+            .verify.containsText('@currAddVer', item.currAdd)
+            .verify.containsText('@permAddVer', item.permAdd)
         return this
     },
     textBoxClear: function (browser) {
@@ -66,7 +66,7 @@ var qaCommands = {
             .verify.elementPresent('@allPrivate')
             .verify.elementPresent('@allPublic')
             .verify.elementPresent('@allOffice')
-            return this
+        return this
     },
     noOfficVer: function (browser) {
         this
@@ -75,7 +75,7 @@ var qaCommands = {
             .verify.elementPresent('@noPrivate')
             .verify.elementPresent('@noPublic')
             .verify.elementPresent('@noOffice')
-            return this
+        return this
     },
     allDownloadsVer: function (browser) {
         this
@@ -90,7 +90,24 @@ var qaCommands = {
             .verify.elementPresent('@noWord')
             .verify.elementPresent('@noDownloads')
         return this
-    }
+    },
+    //Web Tables
+    tableAddnDel: function (browser, item) {
+        this
+            .useXpath()
+            .click('@addButton')
+            .setValue('@addFirstName', item.first)
+            .setValue('@addLastName', item.last)
+            .setValue('@addEmail', item.email)
+            .setValue('@addAge', item.age)
+            .setValue('@addSalary', item.salary)
+            .setValue('@addDept', item.department)
+            .click('@submit')
+            .verify.elementPresent(`//div[div[contains(text(), "${item.first}")] and div[contains(text(), "${item.last}")] and div[contains(text(), "${item.age}")] and div[contains(text(), "${item.email}")] and div[contains(text(), "${item.salary}")] and div[contains(text(), "${item.department}")]]`)
+            .click(`//div[div[contains(text(), "${item.first}")] and div[contains(text(), "${item.last}")] and div[contains(text(), "${item.age}")] and div[contains(text(), "${item.email}")] and div[contains(text(), "${item.salary}")] and div[contains(text(), "${item.department}")]]//*/span[@title="Delete"]`)
+            .verify.not.elementPresent(`//div[div[contains(text(), "${item.first}")] and div[contains(text(), "${item.last}")] and div[contains(text(), "${item.age}")] and div[contains(text(), "${item.email}")] and div[contains(text(), "${item.salary}")] and div[contains(text(), "${item.department}")]]`)
+        return this
+    },
 }
 module.exports = {
     url: 'https://demoqa.com/',
@@ -184,23 +201,25 @@ module.exports = {
         chkVerif: { selector: '//div[@id="result"]', locateStrategy: 'xpath' },
 
         //Radio
-        radio: { selector: '//span[contains(text(), "Radio Button")]', locateStrategy: 'xpath'},
-        radioYes: { selector: '//label[@for="yesRadio"]', locateStrategy: 'xpath'},
-        radioImp: {selector: '//label[@for="impressiveRadio"]', locateStrategy: 'xpath'},
-        radioVer: { selector: '//span[@class="text-success"]', locateStrategy: 'xpath'},
+        radio: { selector: '//span[contains(text(), "Radio Button")]', locateStrategy: 'xpath' },
+        radioYes: { selector: '//label[@for="yesRadio"]', locateStrategy: 'xpath' },
+        radioImp: { selector: '//label[@for="impressiveRadio"]', locateStrategy: 'xpath' },
+        radioVer: { selector: '//span[@class="text-success"]', locateStrategy: 'xpath' },
 
         //Web Tables
-        tables: { selector: '//span[contains(text(), "Web Tables")]', locateStrategy: 'xpath'},
-        addButton: { selector: '//button[@id="addNewRecordButton"]', locateStrategy: 'xpath'},
-        submit: {selector: '//button[@id="submit"]', locateStrategy: 'xpath'},
-        addFirstName: { selector: '//input[@id="firstName"]', locateStrategy: 'xpath'},
-        addLastName: { selector: '//input[@id="lastName"]', locateStrategy: 'xpath'},
-        addEmail: { selector: '//input[@id="userEmail"]', locateStrategy: 'xpath'},
-        addAge: { selector: '//input[@id="age"]', locateStrategy: 'xpath'},
-        addSalary: { selector: '//input[@id="salary"]', locateStrategy: 'xpath'},
-        addDept: { selector: '//input[@id="department"]', locateStrategy: 'xpath'}
+        tables: { selector: '//span[contains(text(), "Web Tables")]', locateStrategy: 'xpath' },
+        addButton: { selector: '//button[@id="addNewRecordButton"]', locateStrategy: 'xpath' },
+        submit: { selector: '//button[@id="submit"]', locateStrategy: 'xpath' },
+        addFirstName: { selector: '//input[@id="firstName"]', locateStrategy: 'xpath' },
+        addLastName: { selector: '//input[@id="lastName"]', locateStrategy: 'xpath' },
+        addEmail: { selector: '//input[@id="userEmail"]', locateStrategy: 'xpath' },
+        addAge: { selector: '//input[@id="age"]', locateStrategy: 'xpath' },
+        addSalary: { selector: '//input[@id="salary"]', locateStrategy: 'xpath' },
+        addDept: { selector: '//input[@id="department"]', locateStrategy: 'xpath' },
+        // addResult: { selector: `//div[div[contains(text(), "${item.first}")] and div[contains(text(), "${item.last}")] and div[contains(text(), "${item.age}")] and div[contains(text(), "${item.email}")] and div[contains(text(), "${item.salary}")] and div[contains(text(), "${item.department}")]]`, locateStrategy: 'xpath' },
+        // deleteNew: { selector: `//div[div[contains(text(), "${item.first}")] and div[contains(text(), "${item.last}")] and div[contains(text(), "${item.age}")] and div[contains(text(), "${item.email}")] and div[contains(text(), "${item.salary}")] and div[contains(text(), "${item.department}")]]//*/span[@title="Delete"]`, locateStrategy: 'xpath' },
         // firstRow: { selector: '(//div[@role="rowgroup"])[1]', locateStrategy: 'xpath'},
-        
+
 
     }
 }

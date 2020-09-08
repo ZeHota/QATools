@@ -5,9 +5,21 @@
 
   <testsuite name="qatools"
     errors="0" failures="0" hostname="" id="" package="qatools" skipped="0"
-    tests="1" time="8.121" timestamp="">
+    tests="1" time="7.100" timestamp="">
   
-    <testcase name="Web Tables" classname="qatools" time="8.121" assertions="0">
+    <testcase name="Web Tables" classname="qatools" time="7.100" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
     </testcase>
   
 

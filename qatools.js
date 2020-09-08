@@ -1,3 +1,5 @@
+var QA = {}
+var webTable = require('../QATools/Assets/webTable')
 var textBox = require('../QATools/Assets/arrays')
 module.exports = {
     beforeEach: browser => {
@@ -74,14 +76,9 @@ module.exports = {
         QA
             .click('@elements')
             .click('@tables')
-            .click('@addButton')
-            .setValue('@addFirstName', 'CJ')
-            .setValue('@addLastName', 'Walk')
-            .setValue('@addEmail', 'cj.walk@hotmail.com')
-            .setValue('@addAge', '27')
-            .setValue('@addSalary', '50000')
-            .setValue('@addDept', 'QA')
-            .click('@submit')
-            .pause(2000)
+        webTable.forEach(option => {
+            QA
+                .tableAddnDel(QA, option)
+        })
     }
 }
