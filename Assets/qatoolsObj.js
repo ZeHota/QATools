@@ -187,6 +187,20 @@ module.exports = {
         radio: { selector: '//span[contains(text(), "Radio Button")]', locateStrategy: 'xpath'},
         radioYes: { selector: '//label[@for="yesRadio"]', locateStrategy: 'xpath'},
         radioImp: {selector: '//label[@for="impressiveRadio"]', locateStrategy: 'xpath'},
-        radioVer: { selector: '//span[@class="text-success"]', locateStrategy: 'xpath'}
+        radioVer: { selector: '//span[@class="text-success"]', locateStrategy: 'xpath'},
+
+        //Web Tables
+        tables: { selector: '//span[contains(text(), "Web Tables")]', locateStrategy: 'xpath'},
+        addButton: { selector: '//button[@id="addNewRecordButton"]', locateStrategy: 'xpath'},
+        submit: {selector: '//button[@id="submit"]', locateStrategy: 'xpath'},
+        addFirstName: { selector: '//input[@id="firstName"]', locateStrategy: 'xpath'},
+        addLastName: { selector: '//input[@id="lastName"]', locateStrategy: 'xpath'},
+        addEmail: { selector: '//input[@id="userEmail"]', locateStrategy: 'xpath'},
+        addAge: { selector: '//input[@id="age"]', locateStrategy: 'xpath'},
+        addSalary: { selector: '//input[@id="salary"]', locateStrategy: 'xpath'},
+        addDept: { selector: '//input[@id="department"]', locateStrategy: 'xpath'}
+        // firstRow: { selector: '(//div[@role="rowgroup"])[1]', locateStrategy: 'xpath'},
+        
+
     }
 }
